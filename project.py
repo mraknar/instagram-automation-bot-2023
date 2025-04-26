@@ -10,14 +10,13 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import random
 import threading
-from ensta import Guest
-from ensta import Host
+from ensta import Mobile as Host
 
 
 def calcTime():
     license_over_date_day = 7
     license_over_date_month = 7
-    license_over_date_year = 2024
+    license_over_date_year = 2025
 
     current_year = datetime.date.today().year
     current_month = datetime.date.today().month
@@ -175,7 +174,7 @@ class Instagram:
     def signIn(self):
 
         try:
-            self.host = Host(self.username,self.password, r"assets/session.txt")
+            self.host = Host(self.username,self.password)
             profil = self.host.profile(self.username)
             self.num_of_follow = profil.following_count
             self.num_of_follower = profil.follower_count
@@ -1529,8 +1528,7 @@ class Instagram:
                 pass
 
             try:
-                guest = Guest()
-                profil = guest.profile(self.username)
+                profil = self.host.profile(self.username)
                 self.num_of_follow = profil.following_count
                 self.num_of_follower = profil.follower_count
                 self.label_follow_text.configure(text=f"{self.num_of_follower} Takipçi   {self.num_of_follow} Takip")
